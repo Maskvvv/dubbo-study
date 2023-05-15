@@ -2,6 +2,7 @@ package com.zhy.provider.service;
 
 import com.zhy.spi.UserService;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author zhouhongyin
@@ -10,8 +11,11 @@ import org.apache.dubbo.config.annotation.DubboService;
 @DubboService
 public class UserServiceImpl implements UserService {
 
+    @Value("${server.port}")
+    private String port;
+
     @Override
     public String getUser(String name) {
-        return "I'm provider receive message: " + name;
+        return "I'm provider(" + port + ") receive message: " + name;
     }
 }
