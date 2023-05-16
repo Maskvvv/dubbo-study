@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 @DubboService
 public class UserServiceImpl implements UserService {
 
-    @Value("${server.port}")
+    @Value("${server.port:8080}")
     private String port;
 
     @Override
