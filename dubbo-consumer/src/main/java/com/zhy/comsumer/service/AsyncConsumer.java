@@ -1,9 +1,10 @@
 package com.zhy.comsumer.service;
 
-import com.zhy.spi.UserService;
+import com.zhy.spi.AsyncUserService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,12 +14,12 @@ import java.util.concurrent.TimeUnit;
  * @since 2023/5/14 21:22
  */
 @Component
-public class Consumer {
+public class AsyncConsumer {
 
     @DubboReference
-    private UserService userService;
+    private AsyncUserService userService;
 
-    //@PostConstruct
+    @PostConstruct
     private void init() {
         System.out.println("init-consumer");
 
