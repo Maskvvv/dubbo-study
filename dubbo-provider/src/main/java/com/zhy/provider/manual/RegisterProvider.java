@@ -5,11 +5,12 @@ import com.zhy.spi.UserService;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
-import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
 
 /**
+ * 手动注册 provider
+ *
  * @author zhouhongyin
  * @since 2023/5/16 17:21
  */

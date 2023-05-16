@@ -4,11 +4,12 @@ import com.zhy.spi.UserService;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
-import org.apache.dubbo.config.ServiceConfig;
 
 import java.io.IOException;
 
 /**
+ * 手动注册 consumer
+ *
  * @author zhouhongyin
  * @since 2023/5/16 17:21
  */
