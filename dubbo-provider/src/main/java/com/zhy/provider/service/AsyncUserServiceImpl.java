@@ -6,10 +6,13 @@ import org.apache.dubbo.rpc.AsyncContext;
 import org.apache.dubbo.rpc.RpcContext;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
+ * 服务提供方异步化实践
+ *
  * @author zhouhongyin
  * @since 2023/5/14 21:08
  */
@@ -19,7 +22,7 @@ public class AsyncUserServiceImpl implements AsyncUserService {
     @Value("${server.port:8080}")
     private String port;
 
-    private ExecutorService threadPool = Executors.newFixedThreadPool(1);
+    private final ExecutorService threadPool = Executors.newFixedThreadPool(1);
 
 
     @Override
@@ -43,5 +46,23 @@ public class AsyncUserServiceImpl implements AsyncUserService {
 
 
         return null;
+    }
+
+    @Override
+    public CompletableFuture<String> getUserFuture(String name) {
+        String message = "I'm provider(" + port + ") receive message: " + name;
+
+
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+            return message;
+        });
+
     }
 }

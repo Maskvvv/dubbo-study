@@ -7,10 +7,10 @@ dubbo:
     port: -1
   registry:
     address: zookeeper://${zookeeper.address:127.0.0.1}:21810
-
   consumer:
     #为整个消费方添加启动不检查提供方服务是否正常
     check: false
+    timeout: 30000
 
 server:
   port: 8082
