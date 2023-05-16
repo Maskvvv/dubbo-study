@@ -4,7 +4,6 @@ import com.zhy.spi.AsyncUserService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -44,7 +43,7 @@ public class AsyncConsumer {
 
     }
 
-    @PostConstruct
+    //@PostConstruct
     private void future() {
         CompletableFuture<String> userFuture = userService.getUserFuture(String.valueOf(System.currentTimeMillis()));
         userFuture.whenComplete((value, e) -> {

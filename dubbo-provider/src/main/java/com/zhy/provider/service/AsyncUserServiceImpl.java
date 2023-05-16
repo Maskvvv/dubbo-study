@@ -29,7 +29,7 @@ public class AsyncUserServiceImpl implements AsyncUserService {
 
     @Override
     public String getUser(String name) {
-        String message = "I'm provider(" + port + ") receive message: " + name;
+        String message = "I'm asynchronous provider(" + port + ") receive message: " + name;
 
         AsyncContext asyncContext = RpcContext.startAsync();
 
