@@ -12,6 +12,8 @@ import java.util.concurrent.Executors;
 
 /**
  * 服务提供方异步化实践
+ * 1. 通过 AsyncContext#startAsync 实现提供方
+ * 2. 通过返回 CompletableFuture 实现提供方
  *
  * @author zhouhongyin
  * @since 2023/5/14 21:08
