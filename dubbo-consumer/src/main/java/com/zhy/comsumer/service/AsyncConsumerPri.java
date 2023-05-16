@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
  * 服务消费方异步化实践
  *
  * 1. 通过 getFuture 方式从 provider 拿到结果
- * 2. 通过 setCallback 方式从 provider 拿到结果
+ * 2. 通过 getCompletableFuture 方式从 provider 拿到结果
  *
  * @author zhouhongyin
  * @since 2023/5/14 21:22
@@ -45,7 +45,7 @@ public class AsyncConsumerPri {
     }
 
     /**
-     * 2. 通过 setCallback 方式从 provider 拿到结果
+     * 2. 通过 getCompletableFuture 方式从 provider 拿到结果
      */
     @PostConstruct
     private void setCallback() {
