@@ -6,7 +6,6 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.rpc.RpcContext;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -47,7 +46,7 @@ public class AsyncConsumerPri {
     /**
      * 2. 通过 getCompletableFuture 方式从 provider 拿到结果
      */
-    @PostConstruct
+    //@PostConstruct
     private void setCallback() {
 
         String user = userService.getUser(String.valueOf(System.currentTimeMillis()));

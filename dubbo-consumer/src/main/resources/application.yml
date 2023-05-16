@@ -10,7 +10,13 @@ dubbo:
   consumer:
     #为整个消费方添加启动不检查提供方服务是否正常
     check: false
+    # 重试次数
+    retries: 3
+    # 超时时间
     timeout: 30000
+
+    # 调用失败时的容错设置 cluster=failover org.apache.dubbo.rpc.cluster.Cluster
+    cluster: failover
 
 server:
   port: 8082
