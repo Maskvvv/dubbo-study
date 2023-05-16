@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutionException;
  * 服务消费方异步化实践
  *
  * 1. 通过 getFuture 方式从 provider 拿到结果
+ * 2. 通过 setCallback 方式从 provider 拿到结果
  *
  * @author zhouhongyin
  * @since 2023/5/14 21:22
@@ -26,8 +27,11 @@ public class AsyncConsumerPri {
     @DubboReference(async = true)
     private AsyncUserService asyncUserService;
 
-    @PostConstruct
-    private void init() throws ExecutionException, InterruptedException {
+    /**
+     * 1. 通过 getFuture 方式从 provider 拿到结果
+     */
+    //@PostConstruct
+    private void getFuture() throws ExecutionException, InterruptedException {
 
         String user = userService.getUser(String.valueOf(System.currentTimeMillis()));
         System.out.println(user);
@@ -37,6 +41,19 @@ public class AsyncConsumerPri {
         String user1 = asyncUserService.getUser(String.valueOf(System.currentTimeMillis()));
         System.out.println(user1);
         System.out.println(RpcContext.getContext().getFuture().get());
+
+    }
+
+    /**
+     * 2. 通过 setCallback 方式从 provider 拿到结果
+     */
+    @PostConstruct
+    private void setCallback() {
+
+        String user = userService.getUser(String.valueOf(System.currentTimeMillis()));
+        System.out.println(user);
+
+        RpcContext.getServiceContext().getCompletableFuture().thenAccept(System.out::println);
 
     }
 
