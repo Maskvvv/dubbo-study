@@ -10,6 +10,10 @@ dubbo:
     # 线程模型设置（dubbo netty） all 使用dubbo自己的线程 org.apache.dubbo.remoting.Dispatcher
     dispatcher: all
 
+    # 服务提供方超时中断流程设置
+    timeout: 30000
+
+
 
 server:
   port: 8083
