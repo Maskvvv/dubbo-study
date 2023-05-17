@@ -6,6 +6,9 @@ dubbo:
     port: -1
   registry:
     address: zookeeper://${zookeeper.address:127.0.0.1}:21810
+  provider:
+    # 线程模型设置（dubbo netty） all 使用dubbo自己的线程 org.apache.dubbo.remoting.Dispatcher
+    dispatcher: all
 
 
 server:
