@@ -1,0 +1,2 @@
+reqNoConsumerFilter=com.zhy.provider.filter.ReqNoConsumerFilter
+reqNoProviderFilter=com.zhy.provider.filter.ReqNoProviderFilter

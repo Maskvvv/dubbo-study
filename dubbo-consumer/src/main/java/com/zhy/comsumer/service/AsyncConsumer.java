@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 @Component
 public class AsyncConsumer {
 
-    @DubboReference
+    @DubboReference(async = true)
     private AsyncUserService userService;
 
 
