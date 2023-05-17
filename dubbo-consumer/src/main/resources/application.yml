@@ -18,5 +18,9 @@ dubbo:
     # 调用失败时的容错设置 cluster=failover org.apache.dubbo.rpc.cluster.Cluster
     cluster: failover
 
+    # 负载均衡策略设置 org.apache.dubbo.rpc.cluster.LoadBalance
+    loadbalance: shortestresponse
+
+
 server:
   port: 8082
