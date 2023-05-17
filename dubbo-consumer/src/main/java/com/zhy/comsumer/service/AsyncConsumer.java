@@ -2,15 +2,14 @@ package com.zhy.comsumer.service;
 
 import com.zhy.spi.AsyncUserService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.rpc.RpcContext;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutionException;
 
 /**
- * 服务提供方异步化实践
+ * 异步调用
  *
  * @author zhouhongyin
  * @since 2023/5/14 21:22
@@ -21,38 +20,53 @@ public class AsyncConsumer {
     @DubboReference
     private AsyncUserService userService;
 
-    //@PostConstruct
-    private void init() {
-        System.out.println("init-consumer");
 
-        System.out.println(userService.getUser("111111111"));
-
-        ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1, r -> {
-            Thread thread = new Thread(r);
-            thread.setName("Consumer-scheduledThread-");
-            return thread;
-        });
-
-        scheduledThreadPool.scheduleWithFixedDelay(() -> {
-            String user = userService.getUser(String.valueOf(System.currentTimeMillis()));
-            System.out.println(Thread.currentThread().getName());
-            System.out.println(user);
-
-            System.out.println("----------------------------------");
-        }, 1, 3, TimeUnit.SECONDS);
-
-    }
-
-    //@PostConstruct
+    /**
+     * CompletableFuture 的方式
+     */
     private void future() {
         CompletableFuture<String> userFuture = userService.getUserFuture(String.valueOf(System.currentTimeMillis()));
-        userFuture.whenComplete((value, e) -> {
-
-            System.out.println("AsyncConsumer-future");
-            System.out.println(value);
+        userFuture.whenComplete((v, t) -> {
+            if (t != null) {
+                t.printStackTrace();
+            } else {
+                System.out.println("Response: " + v);
+            }
         });
 
         System.out.println("end");
+    }
+
+
+    /**
+     * AsyncContext 的方式一
+     */
+    private void context() {
+        // 此调用会立即返回null
+        userService.getUser("world");
+        // 拿到调用的Future引用，当结果返回后，会被通知和设置到此Future
+        CompletableFuture<String> helloFuture = RpcContext.getServiceContext().getCompletableFuture();
+        // 为Future添加回调
+        helloFuture.whenComplete((retValue, exception) -> {
+            if (exception == null) {
+                System.out.println(retValue);
+            } else {
+                exception.printStackTrace();
+            }
+        });
+
+    }
+
+    /**
+     * AsyncContext 的方式二
+     */
+    private void context1() throws ExecutionException, InterruptedException {
+
+        CompletableFuture<String> future = RpcContext.getServiceContext().asyncCall(() -> {
+                return userService.getUser("oneway call request1");
+            });
+
+        future.get();
     }
 
 }
