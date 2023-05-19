@@ -4,6 +4,7 @@ import com.zhy.spi.UserService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +19,7 @@ public class Consumer {
     @DubboReference
     private UserService userService;
 
-    //@PostConstruct
+    @PostConstruct
     private void init() {
         System.out.println("init-consumer");
 
