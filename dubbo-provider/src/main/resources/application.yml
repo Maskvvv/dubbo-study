@@ -13,6 +13,9 @@ dubbo:
     # 服务提供方超时中断流程设置
     timeout: 30000
 
+    # 静态打标
+    tag: gray
+
 
 
 server:
