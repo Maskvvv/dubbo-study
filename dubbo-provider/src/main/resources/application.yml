@@ -1,8 +1,7 @@
 dubbo:
   application:
-    ser
     name: dubbo-provider
-    service-discovery:
+#    service-discovery:
   protocol:
     name: dubbo
     port: -1
