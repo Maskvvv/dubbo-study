@@ -21,6 +21,8 @@ dubbo:
     # 负载均衡策略设置 org.apache.dubbo.rpc.cluster.LoadBalance
     loadbalance: shortestresponse
 
+    # 静态打标
+    tag: gray
 
 server:
   port: 8082
