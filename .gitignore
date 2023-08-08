@@ -1,0 +1,6 @@
+# Project exclude paths
+/dubbo-consumer/target/
+/dubbo-interface/target/
+/dubbo-provider/target/
+
+.idea
