@@ -2,6 +2,7 @@ package com.zhy.comsumer.service;
 
 import com.zhy.spi.UserService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.Method;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -16,7 +17,25 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class Consumer {
 
-    @DubboReference
+    public final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1, r -> {
+        Thread thread = new Thread(r);
+        thread.setName("Consumer-scheduledThread-");
+        return thread;
+    });
+
+    @DubboReference(
+            /** 接口调研超时时间，1毫秒 **/
+            timeout = 10000,
+            /** 启动时不检查 DemoFacade 是否能正常提供服务 **/
+            check = false,
+
+            /** 为 DemoFacade 的 sayHello 方法设置事件通知机制 **/
+            methods = {@Method(
+                    name = "getUser",
+                    oninvoke = "eventNotifyService.onInvoke",
+                    onreturn = "eventNotifyService.onReturn",
+                    onthrow = "eventNotifyService.onThrow")}
+    )
     private UserService userService;
 
     @PostConstruct
@@ -25,13 +44,7 @@ public class Consumer {
 
         System.out.println(userService.getUser("111111111"));
 
-        ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1, r -> {
-            Thread thread = new Thread(r);
-            thread.setName("Consumer-scheduledThread-");
-            return thread;
-        });
-
-        scheduledThreadPool.scheduleWithFixedDelay(() -> {
+        executorService.scheduleWithFixedDelay(() -> {
             String user = userService.getUser(String.valueOf(System.currentTimeMillis()));
             System.out.println(Thread.currentThread().getName());
             System.out.println(user);
