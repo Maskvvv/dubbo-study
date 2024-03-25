@@ -1,7 +1,6 @@
 dubbo:
   application:
-    name: dubbo-provider
-    qos-enable: false
+    name: dubbo-provider2
 #    service-discovery:
   protocol:
     name: dubbo
@@ -24,4 +23,4 @@ dubbo:
 
 
 server:
-  port: 8083
+  port: 8084

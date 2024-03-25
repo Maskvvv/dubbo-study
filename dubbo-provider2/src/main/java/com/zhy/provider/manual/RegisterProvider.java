@@ -1,6 +1,6 @@
 package com.zhy.provider.manual;
 
-import com.zhy.provider.service.UserServiceImpl1;
+import com.zhy.provider.service.UserServiceImpl3;
 import com.zhy.spi.UserService;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.RegistryConfig;
@@ -26,7 +26,7 @@ public class RegisterProvider {
         serviceConfig.setApplication(applicationConfig);
         serviceConfig.setRegistry(registryConfig);
         serviceConfig.setInterface(UserService.class);
-        serviceConfig.setRef(new UserServiceImpl1());
+        serviceConfig.setRef(new UserServiceImpl3());
 
         System.in.read();
 
