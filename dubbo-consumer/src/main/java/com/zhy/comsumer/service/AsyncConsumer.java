@@ -3,7 +3,6 @@ package com.zhy.comsumer.service;
 import com.zhy.spi.AsyncUserService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.rpc.RpcContext;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -14,7 +13,7 @@ import java.util.concurrent.ExecutionException;
  * @author zhouhongyin
  * @since 2023/5/14 21:22
  */
-@Component
+//@Component
 public class AsyncConsumer {
 
     @DubboReference(async = true)

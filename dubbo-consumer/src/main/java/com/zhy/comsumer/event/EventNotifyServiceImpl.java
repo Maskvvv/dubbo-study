@@ -1,8 +1,6 @@
 package com.zhy.comsumer.event;
 
-import org.springframework.stereotype.Component;
-
-@Component("eventNotifyService")
+//@Component("eventNotifyService")
 public class EventNotifyServiceImpl implements EventNotifyService {
 
     // 调用之前

@@ -3,7 +3,6 @@ package com.zhy.comsumer.service;
 import com.zhy.spi.UserService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Method;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.Executors;
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @author zhouhongyin
  * @since 2023/5/14 21:22
  */
-@Component
+//@Component
 public class Consumer {
 
     public final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1, r -> {
