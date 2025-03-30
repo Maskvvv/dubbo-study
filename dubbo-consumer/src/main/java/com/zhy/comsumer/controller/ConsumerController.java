@@ -19,8 +19,8 @@ public class ConsumerController {
 
     @DubboReference(
             check = false,
-            loadbalance = LoadbalanceRules.ROUND_ROBIN,
-            group = "impl2"
+            loadbalance = LoadbalanceRules.ROUND_ROBIN
+//            group = "impl2"
     )
     private UserService userServiceImpl1;
 
